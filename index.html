@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Varun's Portfolio</title>
+<meta name="description" content="R. Varun – Information Technology graduate and Python developer from Chennai.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#04060f; --bg-2:#060a18; --ink:#f3f6ff; --muted:#9aa6c4; --muted-2:#6b7796;
+  --line:rgba(150,175,230,.12); --line-strong:rgba(150,175,230,.22);
+  --accent:#5df0a8; --accent-2:#2fd38a; --accent-ink:#032018;
+  --glass:rgba(12,18,38,.55); --glass-2:rgba(16,24,48,.65);
+  --radius:18px; --radius-lg:26px; --maxw:1180px;
+  --shadow:0 30px 80px -30px rgba(0,0,0,.75);
+  --serif:'Playfair Display',Georgia,serif;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+/* Lenis */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto !important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:hidden}
+/* staggered scroll-reveal */
+[data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.22,.7,.2,1),transform .7s cubic-bezier(.22,.7,.2,1);transition-delay:var(--rd,0ms);will-change:opacity,transform}
+[data-reveal].in{opacity:1;transform:none}
+/* fixed WebGL planet behind everything, never grabs pointer/scroll */
+.planet-canvas{position:fixed;inset:0;width:100vw;height:100vh;display:block;z-index:0;pointer-events:none}
+.page{position:relative;z-index:2}
+.section{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:clamp(80px,12vw,160px) 24px}
+.eyebrow{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+.section-head{max-width:680px;margin:0 auto clamp(48px,6vw,80px);text-align:center}
+.section-head h2,.showcase-copy h2,.cta-card h2{font-size:clamp(30px,4.4vw,50px);font-weight:800;line-height:1.05;letter-spacing:-.02em;text-shadow:0 2px 40px rgba(0,0,0,.6)}
+.section-head p{margin-top:18px;color:var(--muted);font-size:18px;line-height:1.65;text-shadow:0 1px 24px rgba(0,0,0,.55)}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;padding:13px 22px;border-radius:999px;border:1px solid transparent;cursor:pointer;transition:transform .18s ease,box-shadow .25s ease,background .2s ease,border-color .2s ease;white-space:nowrap}
+.btn svg{width:17px;height:17px}
+.btn-primary{color:var(--accent-ink);background:linear-gradient(180deg,var(--accent),var(--accent-2));box-shadow:0 10px 30px -8px rgba(93,240,168,.55),inset 0 1px 0 rgba(255,255,255,.4)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 38px -8px rgba(93,240,168,.7)}
+.btn-outline{color:var(--ink);background:rgba(4,6,15,.6);border-color:var(--line-strong);backdrop-filter:blur(10px)}
+.btn-outline:hover{background:rgba(255,255,255,.09);transform:translateY(-2px)}
+.btn-ghost{color:var(--ink);background:rgba(255,255,255,.05);border-color:var(--line-strong);padding:9px 18px}
+.btn-ghost:hover{background:rgba(255,255,255,.1)}
+svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+svg.i.arrow{stroke-width:2}
+
+/* ---------- serif headings ---------- */
+.hero-title,.section-head h2,.cta-card h2,.card h3,.stat-value,.footer-brand b,.project .no{font-family:var(--serif)}
+.hero-title{font-weight:700;letter-spacing:-.015em}
+.hero-title em{font-style:italic}
+.section-head h2,.cta-card h2{font-weight:700;letter-spacing:-.01em;line-height:1.12}
+.section-head h2 em{font-style:italic}
+.card h3{font-weight:700;letter-spacing:0}
+.stat-value{font-weight:700}
+/* ---------- nav ---------- */
+.nav{position:relative;z-index:5;width:100%;max-width:var(--maxw);margin:0 auto;padding:22px 24px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+.nav-links{display:flex;gap:30px;font-size:14.5px;color:var(--muted)}
+.nav-links a:hover{color:var(--ink)}
+.nav .btn-ghost{justify-self:end}
+
+/* ---------- hero ---------- */
+.hero{min-height:100vh;display:flex;flex-direction:column;background:radial-gradient(125% 62% at 50% -10%,rgba(4,6,15,.82) 0%,rgba(4,6,15,.28) 44%,transparent 68%)}
+.hero-inner{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;max-width:var(--maxw);width:100%;margin:0 auto;padding:0 24px;transform:translateY(-14vh)}
+.col{width:min(100%,780px);margin:0 auto}
+.hero-title{font-size:clamp(40px,6.2vw,86px);font-weight:800;line-height:1.02;letter-spacing:-.03em;text-shadow:0 2px 50px rgba(0,0,0,.55)}
+.hero-title em{font-style:italic;background:linear-gradient(180deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.hero-sub{margin:24px auto 0;max-width:600px;font-size:clamp(16px,2vw,19px);line-height:1.6;color:var(--muted);text-shadow:0 1px 24px rgba(0,0,0,.6)}
+.hero-actions{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.logos{text-align:center;padding:0 24px clamp(36px,6vw,64px);max-width:var(--maxw);width:100%;margin:0 auto}
+.logos-label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);margin-bottom:16px}
+.logos-row{justify-content:center;display:flex;flex-wrap:wrap;gap:clamp(20px,4vw,44px)}
+.logo{font-size:17px;font-weight:700;color:var(--muted-2);opacity:.9;transition:color .2s,opacity .2s}
+.logo:hover{color:var(--ink);opacity:1}
+
+/* ---------- shared section pieces ---------- */
+.section.left .section-head{margin-left:auto;margin-right:auto;text-align:center;max-width:680px}
+.section.left .section-head p{max-width:560px;margin-left:auto;margin-right:auto;color:#c3cde6}
+.section.left .section-head h2,.section.left .eyebrow{text-shadow:0 2px 28px #000,0 0 14px rgba(0,0,0,.75)}
+.section.left .section-head p{text-shadow:0 1px 18px #000,0 0 10px rgba(0,0,0,.8)}
+.section.left{padding-top:clamp(70px,10vw,130px);padding-bottom:clamp(70px,10vw,130px)}
+.card{position:relative;padding:28px;border-radius:var(--radius);background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(14px);transition:transform .3s,border-color .3s,background .3s;overflow:hidden}
+.card::before{content:'';position:absolute;inset:0;background:radial-gradient(120% 120% at 0% 0%,rgba(93,240,168,.08),transparent 45%);opacity:0;transition:opacity .3s;pointer-events:none}
+.card:hover{transform:translateY(-4px);border-color:var(--line-strong);background:var(--glass-2)}
+.card:hover::before{opacity:1}
+.card-icon{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;color:var(--accent);background:rgba(93,240,168,.1);border:1px solid rgba(93,240,168,.18);margin-bottom:16px;font-size:22px}
+.card h3{font-size:19px;font-weight:700;margin-bottom:6px}
+.card p{font-size:15px;color:var(--muted);line-height:1.6}
+.card p strong{color:var(--ink);font-weight:600}
+.badge{display:inline-block;margin-top:10px;font-size:12.5px;font-weight:600;color:var(--accent);background:rgba(93,240,168,.1);border:1px solid rgba(93,240,168,.2);padding:3px 12px;border-radius:999px}
+
+/* about */
+.about-text{color:var(--muted);font-size:17px;line-height:1.75;max-width:680px;margin:0 auto 34px;text-align:center;text-shadow:0 1px 24px rgba(0,0,0,.55)}
+.stack{display:grid;gap:16px}
+.card.row{display:flex;gap:18px;align-items:flex-start}
+.card.row .card-icon{margin:0;flex:none}
+
+/* skills */
+.feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.feature-grid .card{padding:24px}
+.traits{margin-top:18px;padding:26px 28px}
+.traits h3{margin-bottom:14px}
+.traits li{position:relative;padding-left:24px;margin-bottom:9px;color:var(--muted);font-size:15px;line-height:1.55}
+.traits li::before{content:'';position:absolute;left:2px;top:.55em;width:8px;height:8px;border-radius:3px;background:var(--accent);transform:rotate(45deg)}
+
+/* projects */
+.project{padding:28px 30px 26px}
+.project .no{position:absolute;top:10px;right:22px;font-size:64px;font-weight:900;line-height:1;color:transparent;-webkit-text-stroke:1.2px rgba(93,240,168,.35)}
+.project h3{font-size:clamp(20px,2.2vw,25px);padding-right:70px;margin-bottom:12px}
+.project li{position:relative;padding-left:24px;margin-bottom:8px;color:var(--muted);font-size:15.5px;line-height:1.6}
+.project li::before{content:'';position:absolute;left:2px;top:.6em;width:8px;height:8px;border-radius:3px;background:var(--accent);transform:rotate(45deg)}
+.project li b{color:var(--ink);font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tags span{font-size:12.5px;font-weight:600;padding:5px 14px;border-radius:999px;color:var(--accent-ink);background:linear-gradient(180deg,var(--accent),var(--accent-2))}
+
+/* journey (full width) */
+.cols-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.sub-label{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);margin:44px 0 16px}
+.sub-label:first-of-type{margin-top:0}
+.stats{margin-top:clamp(56px,8vw,96px);display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.stat{text-align:center;padding:30px 18px;border-radius:var(--radius);background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(12px)}
+.stat-value{font-size:clamp(30px,4vw,44px);font-weight:800;background:linear-gradient(180deg,#fff,var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.stat-label{margin-top:8px;font-size:14px;color:var(--muted)}
+
+/* cta + footer */
+.cta-card{max-width:760px;margin:0 auto;text-align:center;padding:clamp(48px,7vw,80px) clamp(28px,5vw,64px);border-radius:var(--radius-lg);background:radial-gradient(120% 140% at 50% 0%,rgba(93,240,168,.12),transparent 55%),var(--glass-2);border:1px solid var(--line-strong);box-shadow:var(--shadow);backdrop-filter:blur(18px)}
+.cta-card p{margin:18px 0 32px;color:var(--muted);font-size:18px;line-height:1.65}
+.cta-card .hero-actions{margin-top:0;justify-content:center}
+.contact-line{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:center;font-size:14.5px;color:var(--muted)}
+.contact-line a:hover{color:var(--accent)}
+.footer{display:flex;justify-content:space-between;gap:48px;flex-wrap:wrap;margin-top:clamp(64px,9vw,110px);padding-top:48px;border-top:1px solid var(--line)}
+.footer-brand{max-width:300px;color:var(--muted);font-size:14.5px;line-height:1.6}
+.footer-brand b{display:block;color:var(--ink);font-size:19px;font-weight:800;margin-bottom:8px}
+.footer-cols{display:flex;gap:clamp(32px,6vw,72px);flex-wrap:wrap}
+.footer-cols h4{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);margin-bottom:14px;font-weight:600}
+.footer-cols a{display:block;color:var(--muted);font-size:14.5px;margin-bottom:10px}
+.footer-cols a:hover{color:var(--ink)}
+.copyright{text-align:center;margin-top:56px;font-size:13px;color:var(--muted-2)}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .col{width:100%}
+  .hero-inner{transform:none}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .cols-3{grid-template-columns:1fr 1fr}
+}
+@media (max-width:720px){
+  .nav-links{display:none}
+  .nav{padding:18px 20px;grid-template-columns:1fr auto}
+  .nav>span{display:none}
+  .nav .btn-ghost{justify-self:end}
+  .section{padding:clamp(64px,16vw,110px) 20px}
+}
+@media (max-width:560px){
+  .feature-grid,.cols-3{grid-template-columns:1fr}
+  .hero-actions .btn{flex:1;justify-content:center}
+  .cta-card{padding:40px 22px}
+  .footer{flex-direction:column}
+}
+@media (max-width:380px){.stats{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  [data-reveal]{opacity:1;transform:none;transition:none}
+}
+</style>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.143.0/build/three.module.js",
+  "three/examples/jsm/": "https://unpkg.com/three@0.143.0/examples/jsm/"
+}}
+</script>
+</head>
+<body>
+
+<canvas class="planet-canvas" id="planet"></canvas>
+
+<div class="page" id="top">
+
+  <!-- 1 · HERO -->
+  <header class="hero" id="hero">
+    <nav class="nav">
+      <span></span>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#journey">Journey</a>
+      </div>
+      <a class="btn btn-ghost" href="assets/Varun_Resume.pdf" download>Download CV</a>
+    </nav>
+
+    <div class="hero-inner">
+      <div class="col">
+        <span class="eyebrow" data-reveal style="--rd:0ms">IT Graduate · Python Developer · Chennai</span>
+        <h1 class="hero-title" data-reveal style="--rd:60ms">Hi, I'm<br><em>R. Varun</em></h1>
+        <p class="hero-sub" data-reveal style="--rd:180ms">Information Technology graduate with a strong foundation in computer systems, databases and software development, building Python apps powered by SQL.</p>
+        <div class="hero-actions" data-reveal style="--rd:300ms">
+          <a class="btn btn-primary" href="assets/Varun_Resume.pdf" download>Download CV
+            <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a class="btn btn-outline" href="#contact">Contact Me</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="logos" data-reveal style="--rd:420ms">
+      <div class="logos-label">Tools I work with</div>
+      <div class="logos-row">
+        <span class="logo">Python</span><span class="logo">SQL</span><span class="logo">MySQL</span>
+        <span class="logo">OpenCV</span><span class="logo">Tkinter</span><span class="logo">HTML &amp; CSS</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2 · ABOUT + EDUCATION -->
+  <section class="section left" id="about">
+    <div class="col">
+      <div class="section-head">
+        <span class="eyebrow" data-reveal>About me</span>
+        <h2 data-reveal style="--rd:80ms">Curious mind, <em>steady</em> hands</h2>
+      </div>
+      <p class="about-text" data-reveal style="--rd:140ms">Motivated Information Technology graduate with a strong foundation in computer systems, database management and software development. A quick learner with good problem-solving, communication and teamwork skills, looking for opportunities to grow and contribute in a dynamic IT environment.</p>
+      <div class="stack">
+        <article class="card row" data-reveal style="--rd:0ms">
+          <div class="card-icon">🎓</div>
+          <div>
+            <h3>SRM Institute of Science and Technology</h3>
+            <p>Ramapuram, Chennai<br><strong>B.Tech – Information Technology</strong> · 2022 – 2026</p>
+            <span class="badge">CGPA 7.51 / 10</span>
+          </div>
+        </article>
+        <article class="card row" data-reveal style="--rd:90ms">
+          <div class="card-icon">🏫</div>
+          <div>
+            <h3>Vana Vani Matriculation Higher Secondary School</h3>
+            <p>Class XII — <strong>67.3%</strong> (2022)<br>Class X — <strong>60.8%</strong> (2020)</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · SKILLS + PERSONALITY -->
+  <section class="section left" id="skills">
+    <div class="col">
+      <div class="section-head">
+        <span class="eyebrow" data-reveal>Toolkit</span>
+        <h2 data-reveal style="--rd:80ms">Technical skills</h2>
+        <p data-reveal style="--rd:160ms">The languages and tools I use to build, store and visualise things.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="card" data-reveal style="--rd:0ms"><div class="card-icon"><svg class="i" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg></div><h3>Python</h3><p>Main language for apps, automation and data handling.</p></article>
+        <article class="card" data-reveal style="--rd:90ms"><div class="card-icon"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z"/></svg></div><h3>HTML &amp; CSS</h3><p>Clean, responsive web pages and layouts.</p></article>
+        <article class="card" data-reveal style="--rd:180ms"><div class="card-icon"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="6" height="6" rx="1.5"/><rect x="15" y="15" width="6" height="6" rx="1.5"/><path d="M6 9v3a3 3 0 0 0 3 3h3"/></svg></div><h3>MySQL · SQL</h3><p>Database design, queries and structured data.</p></article>
+        <article class="card" data-reveal style="--rd:270ms"><div class="card-icon"><svg class="i" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3>Tkinter</h3><p>Desktop GUI applications with logins and admin panels.</p></article>
+        <article class="card" data-reveal style="--rd:360ms"><div class="card-icon"><svg class="i" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>OpenCV</h3><p>Computer vision, from real-time eye tracking to alerts.</p></article>
+        <article class="card" data-reveal style="--rd:450ms"><div class="card-icon"><svg class="i" viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 16v-4"/><path d="M13 16V8"/><path d="M18 16v-7"/></svg></div><h3>Microsoft Excel</h3><p>Data organisation and productivity workflows.</p></article>
+      </div>
+      <article class="card traits" data-reveal>
+        <h3>Personality highlights</h3>
+        <ul>
+          <li>Quick learner with a strong interest in problem solving and new technologies</li>
+          <li>Organized and detail-oriented in academic and project work</li>
+          <li>Self-motivated and capable of working independently on technical tasks</li>
+          <li>Works effectively under deadlines while managing multiple assignments</li>
+          <li>Collaborative team member with good communication skills</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- 4 · PROJECTS -->
+  <section class="section left" id="projects">
+    <div class="col">
+      <div class="section-head">
+        <span class="eyebrow" data-reveal>Built for real use</span>
+        <h2 data-reveal style="--rd:80ms">Project experience</h2>
+      </div>
+      <div class="stack">
+        <article class="card project" data-reveal>
+          <span class="no">01</span>
+          <h3>Agriculture Management System</h3>
+          <ul>
+            <li>Designed and developed a system to manage <b>crop details, farmer records, inventory</b> and resource allocation.</li>
+            <li>Improved the efficiency of farm operations through <b>structured data handling</b> and database management.</li>
+          </ul>
+          <div class="tags"><span>Python</span><span>SQL</span></div>
+        </article>
+        <article class="card project" data-reveal>
+          <span class="no">02</span>
+          <h3>Movie Ticket Booking System</h3>
+          <ul>
+            <li>Developed a <b>GUI-based</b> booking application.</li>
+            <li>Implemented <b>user authentication, seat selection</b> and admin-level movie management.</li>
+          </ul>
+          <div class="tags"><span>Python</span><span>Tkinter</span><span>SQL</span></div>
+        </article>
+        <article class="card project" data-reveal>
+          <span class="no">03</span>
+          <h3>Drowsiness Detection System</h3>
+          <ul>
+            <li>Built a <b>real-time monitoring system</b> that tracks eye activity to detect driver drowsiness.</li>
+            <li>Triggers <b>alerts</b> to help prevent accidents.</li>
+          </ul>
+          <div class="tags"><span>Python</span><span>OpenCV</span><span>Deep Learning</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · JOURNEY (details only, no character) -->
+  <section class="section" id="journey">
+    <div class="section-head">
+      <span class="eyebrow" data-reveal>Beyond the classroom</span>
+      <h2 data-reveal style="--rd:80ms">Certifications, giving back and creating</h2>
+      <p data-reveal style="--rd:160ms">Courses I completed, the students I taught, and the content I create.</p>
+    </div>
+
+    <div class="sub-label" data-reveal>Certifications</div>
+    <div class="cols-3">
+      <article class="card" data-reveal style="--rd:0ms"><div class="card-icon">🐍</div><h3>Python Level 1</h3><p>FITA Academy</p></article>
+      <article class="card" data-reveal style="--rd:90ms"><div class="card-icon">🗄️</div><h3>SQL</h3><p>Simplilearn</p></article>
+      <article class="card" data-reveal style="--rd:180ms"><div class="card-icon">🎓</div><h3>Crash Course on Python</h3><p>Google · Coursera</p></article>
+    </div>
+
+    <div class="sub-label" data-reveal>Volunteering</div>
+    <article class="card row" data-reveal>
+      <div class="card-icon">🤝</div>
+      <div>
+        <h3>Panchayat Union Primary School, Kallakurichi</h3>
+        <p>Conducted sessions introducing school students to basic computer science and programming logic through interactive activities.</p>
+      </div>
+    </article>
+
+    <div class="sub-label" data-reveal>Extra-curricular</div>
+    <div class="cols-3">
+      <article class="card" data-reveal style="--rd:0ms"><div class="card-icon">🎥</div><h3>Freelance Videographer &amp; Editor</h3><p>Creating branded digital content.</p></article>
+      <article class="card" data-reveal style="--rd:90ms"><div class="card-icon">✂️</div><h3>Green Trends</h3><p>Produced and edited promotional videos for social media.</p></article>
+      <article class="card" data-reveal style="--rd:180ms"><div class="card-icon">📱</div><h3>Social Media Manager</h3><p>Managed content planning and posting.</p></article>
+    </div>
+
+    <div class="stats">
+      <div class="stat" data-reveal style="--rd:0ms"><div class="stat-value">7.51</div><div class="stat-label">CGPA</div></div>
+      <div class="stat" data-reveal style="--rd:80ms"><div class="stat-value">3</div><div class="stat-label">Projects built</div></div>
+      <div class="stat" data-reveal style="--rd:160ms"><div class="stat-value">3</div><div class="stat-label">Certifications</div></div>
+      <div class="stat" data-reveal style="--rd:240ms"><div class="stat-value">2026</div><div class="stat-label">B.Tech IT graduate</div></div>
+    </div>
+  </section>
+
+  <!-- 6 · CONTACT + FOOTER -->
+  <section class="section cta" id="contact">
+    <div class="cta-card">
+      <span class="eyebrow" data-reveal style="--rd:60ms">Open to opportunities</span>
+      <h2 data-reveal style="--rd:140ms">Let's build something together</h2>
+      <p data-reveal style="--rd:220ms">Looking for entry-level roles and internships in software development, databases and IT. Say hello, I reply quickly.</p>
+      <div class="hero-actions" data-reveal style="--rd:300ms">
+        <a class="btn btn-primary" href="mailto:varunjoel345@gmail.com">Email Me
+          <svg class="i arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <a class="btn btn-outline" href="assets/Varun_Resume.pdf" download>Download CV</a>
+      </div>
+      <div class="contact-line" data-reveal style="--rd:380ms">
+        <a href="mailto:varunjoel345@gmail.com">varunjoel345@gmail.com</a>
+        <a href="tel:+918124625799">+91 81246 25799</a>
+        <span>Chennai, Tamil Nadu</span>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-brand"><b>R. Varun</b>IT graduate and Python developer from Chennai.</div>
+      <div class="footer-cols">
+        <div><h4>Explore</h4><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a></div>
+        <div><h4>More</h4><a href="#journey">Journey</a><a href="#contact">Contact</a><a href="assets/Varun_Resume.pdf" download>Resume</a></div>
+        <div><h4>Reach me</h4><a href="mailto:varunjoel345@gmail.com">Email</a><a href="tel:+918124625799">Phone</a></div>
+      </div>
+    </footer>
+    <p class="copyright">© <span id="year"></span> R. Varun — Built among the stars.</p>
+  </section>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+import { GammaCorrectionShader } from 'three/examples/jsm/shaders/GammaCorrectionShader.js';
+import { CopyShader } from 'three/examples/jsm/shaders/CopyShader.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ---------------- smooth scroll (Lenis) ---------------- */
+if (!reduceMotion) {
+  try {
+    const { default: Lenis } = await import('https://unpkg.com/lenis@1.3.23/dist/lenis.mjs');
+    const lenis = new Lenis({ duration: 1.15, smoothWheel: true, touchMultiplier: 1.5 });
+    const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
+    requestAnimationFrame(raf);
+    document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); lenis.scrollTo(t, { duration: 1.6 }); }
+    }));
+  } catch (e) { console.warn('Lenis unavailable', e); }
+}
+
+/* ---------------- staggered reveal ---------------- */
+const revealEls = document.querySelectorAll('[data-reveal]');
+if (reduceMotion) revealEls.forEach((el) => el.classList.add('in'));
+else {
+  const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+    if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+  }), { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+  revealEls.forEach((el) => io.observe(el));
+}
+
+/* ---------------- WebGL planet ---------------- */
+const ASSET = 'assets/planet';
+const PLANET_GLB = ASSET + '/planet.glb';
+const PLANET_LIGHTS_GLB = ASSET + '/planet-lights.glb';
+const PLANET_CLOUDS_PNG = ASSET + '/planet-clouds.png';
+
+const CONFIG = {
+  rimColor:'#c1faff', rimPower:2.4, nightLights:10, terrainDepth:0.33, terrainShade:1.3,
+  oceanGlint:0.45, oceanDeep:0.12, oceanFlow:3, oceanFlowSpeed:0.8, oceanFlowScale:2.1,
+  glowColor:'#3a6cff', glowIntensity:3.35, planetRadius:1.95, spin:0.03, initRotation:2.07,
+  tilt:0.37, autoRotate:0,
+  cloud1Height:1.005, cloud1Opacity:0.6, cloud1Spin:0.06,
+  cloud2Height:1.03, cloud2Opacity:0.5, cloud2Spin:0.14,
+  cloud3Height:1.075, cloud3Opacity:0.5, cloud3Spin:0.1,
+  bgColor:'#040a1e', flameColor:'#3a6cff', flameColor2:'#c1faff', flameAmt:0.15,
+  atmoColor:'#9fc4ff', atmoCount:320, atmoSize:22, atmoSpeed:0.8,
+  starColor:'#cfe0ff', starCount:1400, starSize:1.6, starFlicker:1,
+  markerColor:'#ffd27a', markerCount:60, markerSize:16, markerSpeed:0.5,
+};
+const LAYERS = { NONE:0, TORUS_SCENE:1, BLOOM_SCENE:2, ENTIRE_SCENE:3 };
+
+const Lerp = (a, b, t) => a + (b - a) * t;
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+function hexToVec3(hex) { const c = new THREE.Color(hex); return new THREE.Vector3(c.r, c.g, c.b); }
+function sample(stops, p) {
+  if (p <= stops[0].p) return stops[0].v;
+  for (let i = 0; i < stops.length - 1; i++) {
+    const a = stops[i], b = stops[i + 1];
+    if (p <= b.p) { const t = (p - a.p) / (b.p - a.p); return Lerp(a.v, b.v, t * t * (3 - 2 * t)); }
+  }
+  return stops[stops.length - 1].v;
+}
+
+const SNOISE = `
+vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
+vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
+float snoise(vec3 v){
+  const vec2 C = vec2(1.0/6.0, 1.0/3.0); const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+  vec3 i = floor(v + dot(v, C.yyy)); vec3 x0 = v - i + dot(i, C.xxx);
+  vec3 g = step(x0.yzx, x0.xyz); vec3 l = 1.0 - g;
+  vec3 i1 = min(g.xyz, l.zxy); vec3 i2 = max(g.xyz, l.zxy);
+  vec3 x1 = x0 - i1 + 1.0 * C.xxx; vec3 x2 = x0 - i2 + 2.0 * C.xxx; vec3 x3 = x0 - 1.0 + 3.0 * C.xxx;
+  i = mod(i, 289.0);
+  vec4 p = permute(permute(permute(i.z + vec4(0.0, i1.z, i2.z, 1.0)) + i.y + vec4(0.0, i1.y, i2.y, 1.0)) + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+  float n_ = 1.0/7.0; vec3 ns = n_ * D.wyz - D.xzx;
+  vec4 j = p - 49.0 * floor(p * ns.z *ns.z);
+  vec4 x_ = floor(j * ns.z); vec4 y_ = floor(j - 7.0 * x_);
+  vec4 x = x_ *ns.x + ns.yyyy; vec4 y = y_ *ns.x + ns.yyyy; vec4 h = 1.0 - abs(x) - abs(y);
+  vec4 b0 = vec4(x.xy, y.xy); vec4 b1 = vec4(x.zw, y.zw);
+  vec4 s0 = floor(b0)*2.0 + 1.0; vec4 s1 = floor(b1)*2.0 + 1.0; vec4 sh = -step(h, vec4(0.0));
+  vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy; vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww;
+  vec3 p0 = vec3(a0.xy,h.x); vec3 p1 = vec3(a0.zw,h.y); vec3 p2 = vec3(a1.xy,h.z); vec3 p3 = vec3(a1.zw,h.w);
+  vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2, p2), dot(p3,p3)));
+  p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+  vec4 m = max(0.5 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0); m = m * m;
+  return 42.0 * dot(m*m, vec4(dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3)));
+}`;
+
+const canvas = document.getElementById('planet');
+let renderer;
+try {
+  renderer = new THREE.WebGL1Renderer({ canvas, antialias: true });
+} catch (e) { console.warn('WebGL unavailable', e); }
+
+if (renderer) {
+  const DPR = Math.min(devicePixelRatio || 1, 1.75);
+  renderer.setPixelRatio(DPR);
+  renderer.setSize(innerWidth, innerHeight, false);
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.VSMShadowMap;
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x000000);
+
+  const camera = new THREE.PerspectiveCamera(40, innerWidth / innerHeight, 0.1, 200);
+  camera.position.set(0, 0, 8);
+  camera.layers.enable(LAYERS.TORUS_SCENE);
+  camera.layers.enable(LAYERS.BLOOM_SCENE);
+  camera.layers.enable(LAYERS.ENTIRE_SCENE);
+  scene.add(camera);
+
+  const ambient = new THREE.AmbientLight(0xffffff, 1.8); ambient.layers.set(LAYERS.ENTIRE_SCENE); scene.add(ambient);
+  const dir = new THREE.DirectionalLight(0xffffff, 0.8); dir.position.set(0, 10, 2); dir.layers.set(LAYERS.ENTIRE_SCENE); scene.add(dir);
+
+  const w0 = innerWidth, h0 = innerHeight;
+  const torusComposer = new EffectComposer(renderer);
+  torusComposer.renderToScreen = false;
+  torusComposer.addPass(new RenderPass(scene, camera));
+  torusComposer.addPass(new ShaderPass(GammaCorrectionShader));
+  torusComposer.addPass(new UnrealBloomPass(new THREE.Vector2(w0, h0), 0.22, 0.2, 0));
+  torusComposer.addPass(new ShaderPass(CopyShader));
+
+  const bloomComposer = new EffectComposer(renderer);
+  bloomComposer.renderToScreen = false;
+  bloomComposer.addPass(new RenderPass(scene, camera));
+  bloomComposer.addPass(new UnrealBloomPass(new THREE.Vector2(w0, h0), 0.5, 0.6, 0));
+  bloomComposer.addPass(new ShaderPass(GammaCorrectionShader));
+
+  const blackTex = new THREE.DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1, THREE.RGBAFormat);
+  blackTex.needsUpdate = true;
+
+  const FinalPass = {
+    uniforms: {
+      iTime:{value:0}, tDiffuse:{value:null}, torusTexture:{value:null}, bloomTexture:{value:null}, haloTexture:{value:blackTex},
+      uBg:{value:hexToVec3(CONFIG.bgColor)}, uFlameA:{value:hexToVec3(CONFIG.flameColor)},
+      uFlameB:{value:hexToVec3(CONFIG.flameColor2)}, uFlameAmt:{value:CONFIG.flameAmt},
+    },
+    vertexShader: `varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position, 1.0); }`,
+    fragmentShader: `
+      uniform float iTime; uniform sampler2D tDiffuse; uniform sampler2D bloomTexture; uniform sampler2D torusTexture; uniform sampler2D haloTexture;
+      uniform vec3 uBg; uniform vec3 uFlameA; uniform vec3 uFlameB; uniform float uFlameAmt;
+      varying vec2 vUv;
+      vec3 warp3d(vec3 pos, float t){ float curv=.8,a=1.9,b=0.7; pos*=2.;
+        pos.x+=curv*sin(t+a*pos.y)+t*b; pos.y+=curv*cos(t+a*pos.x);
+        pos.y+=curv*sin(t+a*pos.z)+t*b; pos.z+=curv*cos(t+a*pos.y);
+        pos.z+=curv*sin(t+a*pos.x)+t*b; pos.x+=curv*cos(t+a*pos.z);
+        return 0.5+0.5*cos(pos.xyz+vec3(1,2,4)); }
+      void main(){
+        vec2 uv = 2.*vUv - 1.;
+        vec3 w = pow(warp3d(vec3(uv.x, sin(uv.y), uv.y), iTime*1.5), vec3(1.5));
+        vec3 flame = 1.5*uFlameA*w.x; flame*=w.y; flame += uFlameB*w.z;
+        flame *= smoothstep(0.25, 1., abs(uv.y));
+        float md = smoothstep(-0.7, 1., -uv.y*uv.x); flame *= md*md;
+        vec3 bg = uBg * (1.0 - 0.4 * length(uv));
+        vec3 halo = texture2D(haloTexture, vUv).xyz;
+        gl_FragColor = vec4(bg + flame*uFlameAmt + texture2D(bloomTexture, vUv).xyz + texture2D(torusTexture, vUv).xyz + texture2D(tDiffuse, vUv).xyz + halo, 1.);
+      }`,
+  };
+  const finalComposer = new EffectComposer(renderer);
+  finalComposer.addPass(new RenderPass(scene, camera));
+  const finalPass = new ShaderPass(FinalPass);
+  finalComposer.addPass(finalPass);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true; controls.dampingFactor = 0.06; controls.enablePan = false;
+  controls.enabled = false; controls.autoRotate = true; controls.autoRotateSpeed = CONFIG.autoRotate;
+  controls.minDistance = 3.5; controls.maxDistance = 16; controls.target.set(0, 0, 0);
+
+  /* ---- scene hierarchy ---- */
+  const worldGroup = new THREE.Group();
+  const planetGroup = new THREE.Group(); planetGroup.rotation.z = CONFIG.tilt;
+  const cloudGroup = new THREE.Group(); cloudGroup.rotation.z = CONFIG.tilt; cloudGroup.visible = false;
+  worldGroup.add(planetGroup, cloudGroup);
+  scene.add(worldGroup);
+
+  const STOPS_X = [{p:0,v:0},{p:0.32,v:-3.1},{p:0.64,v:3.2},{p:1,v:0}];
+  const STOPS_Y = [{p:0,v:-4.5},{p:0.32,v:0.55},{p:0.64,v:0.45},{p:1,v:0.15}];
+  const STOPS_S = [{p:0,v:2.15},{p:0.32,v:1.0},{p:0.64,v:0.92},{p:1,v:1.12}];
+  worldGroup.position.set(STOPS_X[0].v, STOPS_Y[0].v, 0);
+  worldGroup.scale.setScalar(STOPS_S[0].v);
+
+  /* ---- atmosphere halo glow ---- */
+  const glowMesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(2, 2),
+    new THREE.ShaderMaterial({
+      transparent: true, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending,
+      uniforms: { uGlow: { value: hexToVec3(CONFIG.glowColor) }, uIntensity: { value: CONFIG.glowIntensity } },
+      vertexShader: `varying vec2 vUv; void main(){ vUv=uv; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
+      fragmentShader: `
+        uniform vec3 uGlow; uniform float uIntensity; varying vec2 vUv;
+        void main(){
+          float d = length(vUv - 0.5) * 2.0;
+          float a = pow(clamp(1.0 - d, 0.0, 1.0), 2.2);
+          gl_FragColor = vec4(uGlow * a * uIntensity, a);
+        }`,
+    })
+  );
+  glowMesh.scale.setScalar(CONFIG.planetRadius * 2.3);
+  glowMesh.layers.set(LAYERS.ENTIRE_SCENE);
+  worldGroup.add(glowMesh);
+
+  const drawRes = new THREE.Vector2();
+  const resUniform = { value: new THREE.Vector2(1, 1) };
+  function syncRes() { renderer.getDrawingBufferSize(drawRes); resUniform.value.copy(drawRes); }
+  syncRes();
+
+  /* ---- ambient motes ---- */
+  {
+    const n = CONFIG.atmoCount;
+    const pos = new Float32Array(n * 3), size = new Float32Array(n), seed = new Float32Array(n);
+    for (let i = 0; i < n; i++) {
+      pos[i*3] = Math.random()*2-1; pos[i*3+1] = Math.random()*2-1; pos[i*3+2] = Math.random()*2-1;
+      size[i] = CONFIG.atmoSize * (0.4 + Math.random()); seed[i] = Math.random() * 100;
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    g.setAttribute('size', new THREE.BufferAttribute(size, 1));
+    g.setAttribute('seed', new THREE.BufferAttribute(seed, 1));
+    const m = new THREE.ShaderMaterial({
+      transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending,
+      uniforms: { uTime:{value:0}, uRes:resUniform, uColor:{value:hexToVec3(CONFIG.atmoColor)} },
+      vertexShader: `
+        attribute float size; attribute float seed; uniform float uTime; uniform vec2 uRes;
+        varying float vA;
+        vec3 warp(vec3 p, float t){ float c=0.9,a=1.9,b=0.02,s=0.05; p*=2.;
+          p.x+=c*sin(s*t+a*p.y)+t*b; p.y+=c*cos(s*t+a*p.x); p.y+=c*sin(s*t+a*p.z)+t*b;
+          p.z+=c*cos(s*t+a*p.y); p.z+=c*sin(s*t+a*p.x)+t*b; p.x+=c*cos(s*t+a*p.z);
+          return cos(p+vec3(1,2,4)); }
+        void main(){
+          vec3 v = position*4.0 + warp(position, uTime)*1.2;
+          vec4 mv = modelViewMatrix * vec4(v, 1.0);
+          float r = length(v); float farF = 1.0 - smoothstep(5.0, 6.5, r); float nearF = smoothstep(0.0, 0.5, -mv.z);
+          vA = farF * nearF;
+          gl_PointSize = size * uRes.y / 900.0 / -mv.z; gl_PointSize = max(gl_PointSize, 1.0);
+          gl_Position = projectionMatrix * mv;
+        }`,
+      fragmentShader: `
+        uniform vec3 uColor; varying float vA;
+        void main(){ vec2 p = gl_PointCoord - 0.5; float l = length(p); if (l > 0.5) discard;
+          float tex = smoothstep(0.5, 0.0, l); gl_FragColor = vec4(uColor * tex, tex * vA * 0.55); }`,
+    });
+    const motes = new THREE.Points(g, m);
+    motes.frustumCulled = false;
+    motes.layers.set(LAYERS.ENTIRE_SCENE);
+    motes.onBeforeRender = () => {
+      const t = performance.now() / 1000;
+      m.uniforms.uTime.value = t * CONFIG.atmoSpeed * 8;
+      finalPass.uniforms.iTime.value = t;
+      motes.position.copy(camera.position);
+    };
+    scene.add(motes);
+  }
+
+  /* ---- starfield ---- */
+  const starMat = new THREE.ShaderMaterial({
+    transparent: true, depthWrite: false, depthTest: true, blending: THREE.AdditiveBlending,
+    uniforms: { uTime:{value:0}, uSize:{value:CONFIG.starSize}, uFlicker:{value:CONFIG.starFlicker}, uColor:{value:hexToVec3(CONFIG.starColor)}, uRes:resUniform },
+    vertexShader: `
+      attribute float seed; attribute float bright;
+      uniform float uTime; uniform float uSize; uniform float uFlicker; uniform vec2 uRes;
+      varying float vTw;
+      void main(){
+        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        float tw = 0.6 + 0.4 * sin(uTime * uFlicker + seed);
+        vTw = bright * tw;
+        gl_PointSize = max(uSize * uRes.y / 900.0 * (90.0 / max(-mv.z, 1.0)), 1.0);
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: `
+      uniform vec3 uColor; varying float vTw;
+      void main(){
+        vec2 p = gl_PointCoord - 0.5; float l = length(p); if (l > 0.5) discard;
+        float core = smoothstep(0.5, 0.0, l);
+        gl_FragColor = vec4(uColor, core * vTw);
+      }`,
+  });
+  {
+    const n = CONFIG.starCount;
+    const pos = new Float32Array(n * 3), seed = new Float32Array(n), bright = new Float32Array(n);
+    for (let i = 0; i < n; i++) {
+      const u = Math.random() * 2 - 1, th = Math.random() * Math.PI * 2, s = Math.sqrt(1 - u * u);
+      pos[i*3] = 90 * s * Math.cos(th); pos[i*3+1] = 90 * u; pos[i*3+2] = 90 * s * Math.sin(th);
+      seed[i] = Math.random() * 100; bright[i] = 0.35 + Math.random() * 0.65;
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    g.setAttribute('seed', new THREE.BufferAttribute(seed, 1));
+    g.setAttribute('bright', new THREE.BufferAttribute(bright, 1));
+    const stars = new THREE.Points(g, starMat);
+    stars.frustumCulled = false;
+    stars.layers.set(LAYERS.ENTIRE_SCENE);
+    scene.add(stars);
+  }
+
+  /* ---- clouds ---- */
+  const cloudTime = { value: 0 };
+  const cloudMeshes = [];
+  function buildClouds(tex) {
+    tex.wrapS = tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(5, 5);
+    const layers = [
+      { h: CONFIG.cloud1Height, o: CONFIG.cloud1Opacity, s: CONFIG.cloud1Spin, ry: 0.0, phase: 0.0 },
+      { h: CONFIG.cloud2Height, o: CONFIG.cloud2Opacity, s: CONFIG.cloud2Spin, ry: 2.2, phase: 13.0 },
+      { h: CONFIG.cloud3Height, o: CONFIG.cloud3Opacity, s: CONFIG.cloud3Spin, ry: 4.3, phase: 27.0 },
+    ];
+    layers.forEach((L) => {
+      const mat = new THREE.MeshStandardMaterial({ map: tex, transparent: true, depthWrite: false });
+      mat.onBeforeCompile = (shader) => {
+        shader.uniforms.uTime = cloudTime;
+        shader.uniforms.noiseScale = { value: 20 };
+        shader.uniforms.uSpeedX = { value: 1 }; shader.uniforms.uSpeedY = { value: 2 }; shader.uniforms.uSpeedZ = { value: 2 };
+        shader.uniforms.uOpacity = { value: L.o }; shader.uniforms.uPhase = { value: L.phase };
+        shader.vertexShader = 'varying vec2 vCloudUv;\n' + shader.vertexShader.replace(/void main\(\s*\)\s*\{/, 'void main(){\n vCloudUv = uv;');
+        shader.fragmentShader = `
+          varying vec2 vCloudUv; uniform float uTime; uniform float noiseScale; uniform float uSpeedX; uniform float uSpeedY; uniform float uSpeedZ; uniform float uOpacity; uniform float uPhase;
+          ${SNOISE}
+        ` + shader.fragmentShader.replace('#include <dithering_fragment>', `
+          #include <dithering_fragment>
+          gl_FragColor.rgb = vec3(1.0);
+          float cloudNoise = snoise(vec3(vCloudUv.x * noiseScale + uTime * uSpeedX + uPhase, vCloudUv.y * noiseScale - uTime * uSpeedY + uPhase, uTime * uSpeedZ + uPhase));
+          float cloudNdv = max(dot(normalize(vNormal), normalize(vViewPosition)), 0.0);
+          float cloudEdge = pow(1.0 - cloudNdv, 3.0);
+          float cloudMod = mix(cloudNoise, 1.0, cloudEdge);
+          float cloudNdl = dot(normalize(vNormal), normalize(vec3(-0.9, 0.18, 0.4)));
+          float cloudDay = 1.0 - smoothstep(0.30, -0.30, cloudNdl) * 0.9;
+          gl_FragColor.a *= cloudMod * uOpacity * cloudDay;
+        `);
+      };
+      const mesh = new THREE.Mesh(new THREE.SphereGeometry(CONFIG.planetRadius * L.h, 64, 64), mat);
+      mesh.rotation.y = L.ry; mesh.renderOrder = 2; mesh.userData.spin = L.s;
+      mesh.layers.set(LAYERS.ENTIRE_SCENE);
+      cloudGroup.add(mesh); cloudMeshes.push(mesh);
+    });
+  }
+
+  /* ---- land markers ---- */
+  const markerTime = { value: 0 };
+  function buildMarkers(mesh) {
+    try {
+      const img = mesh.material.map && mesh.material.map.image;
+      const geo = mesh.geometry;
+      if (!img || !geo.attributes.uv) return;
+      const W = Math.min(img.width, 1024), H = Math.max(1, Math.round(W * img.height / img.width));
+      const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+      const cx = cv.getContext('2d'); cx.drawImage(img, 0, 0, W, H);
+      const data = cx.getImageData(0, 0, W, H).data;
+      const P = geo.attributes.position, UV = geo.attributes.uv, idx = geo.index;
+      const tris = idx ? idx.count / 3 : P.count / 3;
+      const ia = (t, k) => (idx ? idx.getX(t * 3 + k) : t * 3 + k);
+      const cum = new Float64Array(tris);
+      const A = new THREE.Vector3(), B = new THREE.Vector3(), C = new THREE.Vector3();
+      let total = 0;
+      for (let t = 0; t < tris; t++) {
+        A.fromBufferAttribute(P, ia(t, 0)); B.fromBufferAttribute(P, ia(t, 1)); C.fromBufferAttribute(P, ia(t, 2));
+        total += B.clone().sub(A).cross(C.clone().sub(A)).length() * 0.5; cum[t] = total;
+      }
+      const out = [], seeds = [];
+      let guard = 0;
+      while (out.length < CONFIG.markerCount * 3 && guard++ < 40000) {
+        const r = Math.random() * total;
+        let lo = 0, hi = tris - 1;
+        while (lo < hi) { const mid = (lo + hi) >> 1; if (cum[mid] < r) lo = mid + 1; else hi = mid; }
+        const a = ia(lo, 0), b = ia(lo, 1), c = ia(lo, 2);
+        const r1 = Math.sqrt(Math.random()), r2 = Math.random();
+        const u = 1 - r1, v = r1 * (1 - r2), w = r1 * r2;
+        const uu = UV.getX(a) * u + UV.getX(b) * v + UV.getX(c) * w;
+        const vv = UV.getY(a) * u + UV.getY(b) * v + UV.getY(c) * w;
+        const px = clamp(Math.floor(uu * W), 0, W - 1), py = clamp(Math.floor(vv * H), 0, H - 1);
+        const o = (py * W + px) * 4, cr = data[o], cg = data[o + 1], cb = data[o + 2];
+        if (cb > cr + 6 && cb > cg + 6) continue;
+        A.fromBufferAttribute(P, a); B.fromBufferAttribute(P, b); C.fromBufferAttribute(P, c);
+        const p = A.multiplyScalar(u).add(B.multiplyScalar(v)).add(C.multiplyScalar(w)).multiplyScalar(1.012);
+        out.push(p.x, p.y, p.z); seeds.push(Math.random());
+      }
+      const g = new THREE.BufferGeometry();
+      g.setAttribute('position', new THREE.Float32BufferAttribute(out, 3));
+      g.setAttribute('seed', new THREE.Float32BufferAttribute(seeds, 1));
+      const m = new THREE.ShaderMaterial({
+        transparent: true, depthWrite: false, depthTest: true, blending: THREE.AdditiveBlending,
+        uniforms: { uTime: markerTime, uColor: { value: hexToVec3(CONFIG.markerColor) }, uSize: { value: CONFIG.markerSize }, uSpeed: { value: CONFIG.markerSpeed }, uRes: resUniform },
+        vertexShader: `
+          attribute float seed; uniform float uSize; uniform vec2 uRes;
+          varying float vSeed; varying float vFade;
+          void main(){
+            vSeed = seed;
+            vec4 mv = modelViewMatrix * vec4(position, 1.0);
+            vec3 vn = normalize(normalMatrix * normalize(position));
+            vec3 vd = normalize(-mv.xyz);
+            vFade = smoothstep(0.15, 0.5, dot(vn, vd));
+            gl_PointSize = max(uSize * uRes.y / 900.0 * (7.0 / max(-mv.z, 1.0)), 2.0);
+            gl_Position = projectionMatrix * mv;
+          }`,
+        fragmentShader: `
+          uniform vec3 uColor; uniform float uTime; uniform float uSpeed;
+          varying float vSeed; varying float vFade;
+          void main(){
+            if (vFade <= 0.001) discard;
+            vec2 p = gl_PointCoord - 0.5;
+            float d = length(p) * 2.0;
+            if (d > 1.0) discard;
+            float core = smoothstep(0.30, 0.0, d) * 1.2;
+            float ph = fract(uTime * uSpeed + vSeed);
+            float ring = smoothstep(0.07, 0.0, abs(d - ph)) * (1.0 - ph);
+            gl_FragColor = vec4(uColor, clamp(core + ring, 0.0, 1.0) * vFade);
+          }`,
+      });
+      const pts = new THREE.Points(g, m);
+      pts.frustumCulled = false;
+      pts.layers.set(LAYERS.ENTIRE_SCENE); pts.layers.enable(LAYERS.BLOOM_SCENE);
+      mesh.add(pts);
+    } catch (e) { console.warn('markers skipped', e); }
+  }
+
+  /* ---- planet ---- */
+  let planetReady = false, entryT0 = 0;
+  const planetTime = { value: 0 };
+  const draco = new DRACOLoader(); draco.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.5/');
+  const gltf = new GLTFLoader(); gltf.setDRACOLoader(draco);
+  const firstMesh = (root) => { let f = null; root.traverse((o) => { if (!f && o.isMesh) f = o; }); return f; };
+
+  gltf.load(PLANET_LIGHTS_GLB, (lg) => {
+    const lm = firstMesh(lg.scene);
+    const nightTex = lm && lm.material && lm.material.map;
+    gltf.load(PLANET_GLB, (pg) => {
+      const mesh = firstMesh(pg.scene);
+      if (!mesh) return;
+      mesh.geometry.computeBoundingSphere();
+      mesh.scale.setScalar(CONFIG.planetRadius / mesh.geometry.boundingSphere.radius);
+      const mat = mesh.material.clone();
+      mat.metalness = 0; mat.roughness = 1; mat.envMapIntensity = 0;
+      mat.extensions = Object.assign({}, mat.extensions, { derivatives: true });
+      mat.onBeforeCompile = (shader) => {
+        Object.assign(shader.uniforms, {
+          time: planetTime, noiseScale: { value: 30 }, speedX: { value: 1.5 }, speedY: { value: 2.0 }, speedZ: { value: 2.5 },
+          rimColor: { value: hexToVec3(CONFIG.rimColor) }, rimPower: { value: CONFIG.rimPower },
+          nightBlendTexture: { value: nightTex || blackTex }, nightLights: { value: CONFIG.nightLights },
+          terrainDepth: { value: CONFIG.terrainDepth }, terrainShade: { value: CONFIG.terrainShade },
+          oceanGlint: { value: CONFIG.oceanGlint }, oceanDeep: { value: CONFIG.oceanDeep },
+          oceanFlow: { value: CONFIG.oceanFlow }, oceanFlowSpeed: { value: CONFIG.oceanFlowSpeed }, oceanFlowScale: { value: CONFIG.oceanFlowScale },
+        });
+        shader.vertexShader = 'varying vec2 vCustomUv;\n' + shader.vertexShader.replace(/void main\(\s*\)\s*\{/, 'void main(){\n vCustomUv = uv;');
+        shader.fragmentShader = `
+          varying vec2 vCustomUv; uniform float time; uniform float noiseScale; uniform float speedX; uniform float speedY; uniform float speedZ;
+          uniform vec3 rimColor; uniform float rimPower; uniform sampler2D nightBlendTexture; uniform float nightLights;
+          uniform float terrainDepth; uniform float terrainShade; uniform float oceanGlint; uniform float oceanDeep;
+          uniform float oceanFlow; uniform float oceanFlowSpeed; uniform float oceanFlowScale;
+          ${SNOISE}
+        ` + shader.fragmentShader.replace('#include <dithering_fragment>', `
+          #include <dithering_fragment>
+          vec3 normalizedNormal = normalize(vNormal);
+          vec3 viewDir = normalize(vViewPosition);
+          float rim = 1.0 - max(dot(viewDir, normalizedNormal), 0.0);
+          rim = pow(rim, rimPower); rim = pow(rim, 1.5); rim *= 0.7;
+          vec3 currentColor = gl_FragColor.rgb;
+          float blueDom = currentColor.b - max(currentColor.r, currentColor.g);
+          float waterMask = clamp(smoothstep(-0.005, 0.03, blueDom), 0.0, 1.0);
+          float shimmer = snoise(vec3(vCustomUv.x * noiseScale + time * speedX, vCustomUv.y * noiseScale - time * speedY, time * speedZ));
+          gl_FragColor.rgb += waterMask * shimmer * 0.025;
+          float fT = time * oceanFlowSpeed * 4.0;
+          float fS = 4.0 * oceanFlowScale;
+          float warp = snoise(vec3(vCustomUv.x * fS - fT * 0.5, vCustomUv.y * fS + fT * 0.4, fT * 0.5));
+          float flow = snoise(vec3(vCustomUv.x * fS * 2.0 + fT * 0.6 + warp, vCustomUv.y * fS * 2.0 - fT * 0.5, fT * 0.7));
+          flow = warp * 0.6 + flow * 0.4;
+          gl_FragColor.rgb += waterMask * flow * 0.12 * oceanFlow;
+          gl_FragColor.rgb = mix(gl_FragColor.rgb, vec3(0.01, 0.06, 0.16), waterMask * oceanDeep);
+          vec3 finalColor = mix(gl_FragColor.rgb, rimColor, rim);
+          gl_FragColor = vec4(finalColor, 1.0);
+          vec3 surfPos = -vViewPosition;
+          float terrH = dot(texture2D(map, vCustomUv).rgb, vec3(0.299, 0.587, 0.114));
+          vec3 sigX = dFdx(surfPos), sigY = dFdy(surfPos);
+          vec3 vR1 = cross(sigY, normalizedNormal), vR2 = cross(normalizedNormal, sigX);
+          float fDet = dot(sigX, vR1);
+          vec3 vGrad = sign(fDet) * (dFdx(terrH) * vR1 + dFdy(terrH) * vR2);
+          vec3 bumpedNormal = normalize(abs(fDet) * normalizedNormal - terrainDepth * vGrad);
+          vec3 shadeNormal = mix(bumpedNormal, normalizedNormal, waterMask);
+          vec3 cityLights = texture2D(nightBlendTexture, vCustomUv).rgb * gl_FragColor.rgb * nightLights;
+          vec3 viewSunDir = normalize(vec3(-0.9, 0.18, 0.4));
+          float ndl = dot(normalizedNormal, viewSunDir);
+          float dayAmt = smoothstep(-0.05, 0.35, ndl);
+          float relief = dot(shadeNormal, viewSunDir) - ndl;
+          gl_FragColor.rgb *= clamp(1.0 + relief * terrainShade * dayAmt, 0.55, 1.6);
+          float nightFactor  = smoothstep(0.18, -0.30, ndl);
+          float lightsFactor = smoothstep(0.30, -0.35, ndl);
+          gl_FragColor.rgb = mix(gl_FragColor.rgb, gl_FragColor.rgb * 0.08, nightFactor);
+          gl_FragColor.rgb += cityLights * lightsFactor;
+          vec3 halfDir = normalize(viewSunDir + viewDir);
+          float ripple = snoise(vec3(vCustomUv * 240.0, time * 4.0));
+          float ndh = max(dot(normalizedNormal, halfDir) + ripple * 0.02, 0.0);
+          float glint = pow(ndh, 140.0);
+          gl_FragColor.rgb += glint * waterMask * dayAmt * oceanGlint * vec3(1.0, 0.97, 0.88);
+        `);
+      };
+      mesh.material = mat;
+      mesh.layers.set(LAYERS.ENTIRE_SCENE);
+      mesh.position.set(0, 0, 0);
+      planetGroup.add(mesh);
+      buildMarkers(mesh);
+      new THREE.TextureLoader().load(PLANET_CLOUDS_PNG, (tex) => { buildClouds(tex); cloudGroup.visible = true; });
+      planetReady = true; entryT0 = performance.now() / 1000;
+    }, undefined, (e) => console.warn('planet.glb failed', e));
+  }, undefined, (e) => console.warn('planet-lights.glb failed', e));
+
+  /* ---- resize ---- */
+  addEventListener('resize', () => {
+    camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+    renderer.setPixelRatio(DPR); renderer.setSize(innerWidth, innerHeight, false);
+    [torusComposer, bloomComposer, finalComposer].forEach((c) => { c.setPixelRatio(DPR); c.setSize(innerWidth, innerHeight); });
+    syncRes();
+  });
+
+  /* ---- loop ---- */
+  const ENTRY_DUR = 1.9, ENTRY_START_Y = -6.5;
+  let curP = 0, curX = STOPS_X[0].v, curY = STOPS_Y[0].v, curS = STOPS_S[0].v, spinPhase = 0;
+  let last = performance.now() / 1000, planetTimeV = 0, cloudTimeV = 0, starTimeV = 0, markerTimeV = 0;
+
+  function frame() {
+    requestAnimationFrame(frame);
+    const now = performance.now() / 1000;
+    const dt = Math.min(now - last, 0.05); last = now;
+    planetTimeV += dt / 12; cloudTimeV += dt / 20; starTimeV += dt; markerTimeV += dt;
+    planetTime.value = planetTimeV; cloudTime.value = cloudTimeV; starMat.uniforms.uTime.value = starTimeV; markerTime.value = markerTimeV;
+
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+    const pTarget = clamp(scrollY / maxScroll, 0, 1);
+    curP += (pTarget - curP) * Math.min(1, dt * 4.5);
+    const sideScale = clamp(innerWidth / 1200, 0.5, 1);
+    const k = Math.min(1, dt * 3.2);
+    curX += (sample(STOPS_X, curP) * sideScale - curX) * k;
+    curY += (sample(STOPS_Y, curP) - curY) * k;
+    curS += (sample(STOPS_S, curP) - curS) * k;
+
+    let entryY = 0;
+    if (planetReady && !reduceMotion) {
+      const t = clamp((now - entryT0) / ENTRY_DUR, 0, 1);
+      entryY = ENTRY_START_Y * (1 - (1 - Math.pow(1 - t, 3)));
+    }
+    worldGroup.position.set(curX, curY + entryY, 0);
+    worldGroup.scale.setScalar(curS);
+
+    spinPhase += dt * CONFIG.spin;
+    planetGroup.rotation.y = CONFIG.initRotation + spinPhase + curP * Math.PI * 1.6;
+    cloudMeshes.forEach((m) => { m.rotation.y += dt * m.userData.spin; });
+    glowMesh.quaternion.copy(camera.quaternion);
+
+    camera.layers.set(LAYERS.TORUS_SCENE); torusComposer.render();
+    finalPass.uniforms.torusTexture.value = torusComposer.readBuffer.texture;
+    camera.layers.set(LAYERS.BLOOM_SCENE); bloomComposer.render();
+    finalPass.uniforms.bloomTexture.value = bloomComposer.readBuffer.texture;
+    camera.layers.set(LAYERS.ENTIRE_SCENE); finalComposer.render();
+  }
+  frame();
+} else {
+}
+</script>
+</body>
+</html>
